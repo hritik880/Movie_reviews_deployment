@@ -1,0 +1,51 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> 
+    </head>
+</html>
+<body>
+    <div class="header-image">
+        <img src="{{url_for('static', filename='movie_review_image.jpg')}}">
+    </div>
+    <header>
+       
+        <div class="container">
+            <div id="brandname">
+                <h> Movie Review Sentiment Analysis</h1>
+            </div>
+
+
+        </div>
+        <div class = "input_text">
+            <div>
+                <form action="{{ url_for('predict')}}" method="POST">
+                    <h1 style="font-weight:normal" > Enter your review </h1>
+                    <textarea id="textarea" name="message" rows="6" cols="50"></textarea>
+                    <br/>
+                    <input type="submit" class="btn-info" value="predict">
+                </form>
+            </div>
+            <p >
+                <b style="font-weight:normal; font:13px/2 sans-serif;" >Results for Comments</b>
+            </p>
+            <div class="results">
+                {% if prediction == "neg" %}
+                <h2 style="color:red;">Negative review &#128533</h2>
+                {% elif prediction == "pos" %}
+                <h2 style="color:lightgreen;">Positive review &#128515</h2>
+                {% endif %}
+            </div>
+        
+            <div class = "update">
+                <form id="save-form" class="save-form" action="{{ url_for('save_pred')}}" method="post">
+                    <button type="submit" class="btn success" name="save_type" value="correct">I was correct</button>
+                    <button type="submit" class="btn fail" name="save_type" value="incorrect">I was incorrect</button>
+                </form>
+            </div>
+        </div>
+            
+    </header>
+
+</body>
